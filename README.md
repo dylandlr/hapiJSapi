@@ -1,5 +1,3 @@
----
-
 ## README
 
 # Hapi.js API with MongoDB and Mocha Testing
@@ -177,11 +175,5 @@ Tests are located in `/test` directory. Follow these conventions:
 3. Commit your changes
 4. Push to the branch
 5. Create a Pull Request
-
----
-
-## License
-
-MIT
 
 ---
