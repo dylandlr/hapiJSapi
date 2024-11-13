@@ -1,0 +1,28 @@
+{
+  "name": "a4",
+  "version": "1.0.0",
+  "description": "---",
+  "main": "db.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "set NODE_ENV=test&& mocha \"test/**/*.test.js\" --exit",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/code": "^9.0.3",
+    "@hapi/hapi": "^21.3.12",
+    "a4": "file:",
+    "mongoose": "^8.8.1"
+  },
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "chai-http": "^4.3.0",
+    "cross-env": "^7.0.3",
+    "mocha": "^10.8.2"
+  }
+}

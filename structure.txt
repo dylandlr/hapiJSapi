@@ -1,0 +1,8 @@
+a4/
+├── models
+│   └── Item.js       # Mongoose schema for items
+├── test
+│   └── api.test.js   # Mocha tests for API endpoints
+├── db.js             # MongoDB connection setup
+├── server.js         # Hapi.js API server with CRUD routes
+└── README.md         # Documentation
