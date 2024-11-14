@@ -1,5 +1,3 @@
-## README
-
 # Hapi.js API with MongoDB and Mocha Testing
 
 A simple RESTful API built with Hapi.js, MongoDB, and Mongoose, with Mocha/Chai testing.
@@ -7,13 +5,13 @@ A simple RESTful API built with Hapi.js, MongoDB, and Mongoose, with Mocha/Chai 
 ### Project Structure
 
 ```
-.
+a4/
 ├── models
-│   └── Item.js       # Mongoose schema for items
+│   └── Item.js       # MongoDB schema
 ├── test
-│   └── api.test.js   # Mocha tests for API endpoints
-├── db.js             # MongoDB connection setup
-├── server.js         # Hapi.js API server with CRUD routes
+│   └── api.test.js   # Mocha tests for API
+├── db.js             # MongoDB connection
+├── server.js         # Hapi.js API server
 └── README.md         # Documentation
 ```
 
@@ -63,34 +61,60 @@ The server should be running on `http://localhost:3000`.
 
 ### 5. Run Tests
 
-#To run the tests, use:
+To run the tests, use:
 
 ```bash
 npm test
 ```
 
 This will run all Mocha tests in the `test` directory.
----
 
 ## API Documentation
 
 ### Endpoints
 
-1. **`GET /items`** - Retrieve all items.
+1. **`GET /items`** - Retrieve all items
 
-   - **Response**: Returns an array of all items.
+   - **Method**: GET
+   - **URL**: `/items`
+   - **Response**: Array of items
    - **Status Code**: 200
+   - **Response Body**:
+     ```json
+     [
+       {
+         "_id": "string",
+         "name": "string",
+         "description": "string"
+       }
+     ]
+     ```
 
-2. **`GET /items/{id}`** - Retrieve an item by ID.
+2. **`GET /items/{id}`** - Retrieve a specific item
 
-   - **Params**: `id` - ID of the item to retrieve.
-   - **Response**: Returns the item if it exists.
-   - **Status Codes**:
-     - 200: Success
-     - 404: Item not found
+   - **Method**: GET
+   - **URL**: `/items/{id}`
+   - **Parameters**:
+     - `id` (path parameter) - MongoDB ObjectId of the item
+   - **Success Response**:
+     - **Code**: 200
+     - **Content**: Single item object
+   - **Error Response**:
+     - **Code**: 404
+     - **Content**: `{ "message": "Item not found" }`
+   - **Response Body**:
+     ```json
+     {
+       "_id": "string",
+       "name": "string",
+       "description": "string"
+     }
+     ```
 
-3. **`POST /items`** - Create a new item.
+3. **`POST /items`** - Create a new item
 
+   - **Method**: POST
+   - **URL**: `/items`
    - **Body**:
      ```json
      {
@@ -98,12 +122,24 @@ This will run all Mocha tests in the `test` directory.
        "description": "string"
      }
      ```
-   - **Response**: The created item.
-   - **Status Code**: 201
+   - **Success Response**:
+     - **Code**: 201
+     - **Content**: Created item object
+   - **Response Body**:
+     ```json
+     {
+       "_id": "string",
+       "name": "string",
+       "description": "string"
+     }
+     ```
 
-4. **`PUT /items/{id}`** - Update an existing item.
+4. **`PUT /items/{id}`** - Update an existing item
 
-   - **Params**: `id` - ID of the item to update.
+   - **Method**: PUT
+   - **URL**: `/items/{id}`
+   - **Parameters**:
+     - `id` (path parameter) - MongoDB ObjectId of the item
    - **Body**:
      ```json
      {
@@ -111,24 +147,34 @@ This will run all Mocha tests in the `test` directory.
        "description": "string"
      }
      ```
-   - **Response**: The updated item.
-   - **Status Code**: 200
+   - **Success Response**:
+     - **Code**: 200
+     - **Content**: Updated item object
+   - **Error Response**:
+     - **Code**: 404
+     - **Content**: `{ "message": "Item not found" }`
 
-5. **`DELETE /items/{id}`** - Delete an item by ID.
-   - **Params**: `id` - ID of the item to delete.
-   - **Status Code**: 204
+5. **`DELETE /items/{id}`** - Delete an item
+   - **Method**: DELETE
+   - **URL**: `/items/{id}`
+   - **Parameters**:
+     - `id` (path parameter) - MongoDB ObjectId of the item
+   - **Success Response**:
+     - **Code**: 204
+     - **Content**: No content
+   - **Error Response**:
+     - **Code**: 404
+     - **Content**: `{ "message": "Item not found" }`
 
----
+### Error Responses
 
-## Error Handling
+All endpoints may return the following errors:
 
-The API implements standard HTTP error codes:
+- **400 Bad Request**: When the request body or parameters are invalid
+- **404 Not Found**: When the requested resource doesn't exist
+- **500 Internal Server Error**: When an unexpected error occurs
 
-- `400` - Bad Request (invalid input)
-- `404` - Resource Not Found
-- `500` - Internal Server Error
-
-Errors are returned in the following format:
+Error response format:
 
 ```json
 {
@@ -138,24 +184,15 @@ Errors are returned in the following format:
 }
 ```
 
----
-
-## Testing
-
 ### Prerequisites
 
 - MongoDB must be running
 - Test database will be created automatically
 - Environment should be set to `test`
-
-### Running Tests
+- Dependencies should be installed
 
 ```bash
-# Run all tests
-npm test
-
-# Run with coverage
-npm run test:coverage
+$ npm install mocha chai mongoose chai-http @hapi/code @hapi/hapi
 ```
 
 ### Writing Tests
@@ -166,8 +203,6 @@ Tests are located in `/test` directory. Follow these conventions:
 - Use descriptive test names
 - Clean up test data after each test
 
----
-
 ## Contributing
 
 1. Fork the repository
@@ -176,4 +211,6 @@ Tests are located in `/test` directory. Follow these conventions:
 4. Push to the branch
 5. Create a Pull Request
 
----
+## License
+
+MIT License (c) 2024
